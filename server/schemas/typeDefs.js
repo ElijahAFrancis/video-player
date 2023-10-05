@@ -7,6 +7,20 @@ type User {
     orders: [Order]
   }
 
+  type Video {
+    id: String
+    title: String
+    filename: String
+}
+
+type Query {
+    video(id: String): Video
+}
+
+type Mutation {
+    uploadVideo(title: String, video: String): Video
+}
+
   type Checkout {
     session: ID
   }
