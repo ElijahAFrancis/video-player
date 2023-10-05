@@ -17,5 +17,11 @@ function NavBarColor () {
       </Navbar>
         </>
     );
+<<<<<<< HEAD
 }
 export default NavBarColor;
+=======
+   
+}
+export default NavBarColor;
+>>>>>>> 5ca40d5 (I added the navBar file in the components folder)
