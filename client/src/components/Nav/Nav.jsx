@@ -17,6 +17,5 @@ function NavBarColor () {
       </Navbar>
         </>
     );
-   
 }
 export default NavBarColor;
