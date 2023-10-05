@@ -1,3 +1,4 @@
 const User = require('./User');
+const Video = require('./Video')
 
-module.exports = { User, Product, Category, Order };
+module.exports = { User, Video };
