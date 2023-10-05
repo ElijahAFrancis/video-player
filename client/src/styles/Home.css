@@ -1,0 +1,29 @@
+/* Import your existing styles */
+@import url('../index.css');
+
+/* Override existing styles specific to the homepage */
+.main {
+    /* Center the content on the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #242424;
+    /* Background color for the homepage */
+}
+
+.col-12 {
+    max-width: 400px;
+    /* Adjust the max-width to match your design */
+}
+
+.title {
+    background-color: #FFA500;
+    /* Bright orange background color for the title */
+    color: #fff;
+    /* Text color for the title */
+    font-size: 1.5rem;
+    padding: 10px;
+    text-align: center;
+}
