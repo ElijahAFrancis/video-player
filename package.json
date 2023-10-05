@@ -11,6 +11,8 @@
     "build": "cd client && npm run build"
   },
   "dependencies": {
-    "concurrently": "^8.2.1"
+    "bootstrap": "^5.3.2",
+    "concurrently": "^8.2.1",
+    "multer": "^1.4.5-lts.1"
   }
 }
