@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {
+  Collapse,
   Navbar,
+  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
@@ -12,17 +14,17 @@ import {
   NavbarText,
 } from 'reactstrap';
 
-function Header(args) {
-  // const [isOpen, setIsOpen] = useState(false);
+function Example(args) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <Navbar {...args}>
         <NavbarBrand href="/">reactstrap</NavbarBrand>
-        {/* <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar> */}
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
             <NavItem>
               <NavLink href="/components/">Components</NavLink>
@@ -45,10 +47,10 @@ function Header(args) {
             </UncontrolledDropdown>
           </Nav>
           <NavbarText>Simple Text</NavbarText>
-        {/* </Collapse> */}
+        </Collapse>
       </Navbar>
     </div>
   );
 }
 
-export default Header;
+export default Example;

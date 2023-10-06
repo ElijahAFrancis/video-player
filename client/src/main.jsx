@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './App.jsx';
 import Upload from './pages/Upload'
-// import Home from './pages/Home';
+import Home from './pages/Home';
 // import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Upload />
+        element: <Home />
       }, {
         path: '/login',
         element: <Login />
