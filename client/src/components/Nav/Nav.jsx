@@ -1,57 +1,21 @@
-import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
-
-function Nav() {
-
-  function showNavigation() {
-    if (Auth.loggedIn()) {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/orderHistory">
-              Order History
-            </Link>
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
-        </ul>
-      );
-    } else {
-      return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
-      );
-    }
-  }
-
-  return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
-    </header>
-  );
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+ 
+function NavBarColor () {
+    return(
+        <>
+         <Navbar bg="primary" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">Home</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#logout">logout</Nav.Link>
+            <Nav.Link href="#all videos">all videos</Nav.Link>
+            <Nav.Link href="#upload">upload a video</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+        </>
+    );
 }
-
-export default Nav;
+export default NavBarColor;
