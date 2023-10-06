@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import Upload from '../components/Upload/Upload.jsx'
+import Upload from '../components/Upload/index.jsx'
 // import ProfileList from '../components/Profile';
 // import { QUERY_PROFILES } from '../utils/queries';
 import "../styles/Home.css";
