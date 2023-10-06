@@ -1,11 +1,25 @@
+import React, { useState } from 'react';
+import {
+    FormGroup,
+    Label,
+    Input,
+    FormText
+} from 'reactstrap';
 
-const Upload = () => {
-  return (
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile" />
-    </div>
-  );
-};
+function Upload () {
+<FormGroup>
+<Label for="exampleFile">
+  File
+</Label>
+<Input
+  id="exampleFile"
+  name="file"
+  type="file"
+/>
+<FormText>
+  This is some placeholder block-level help text for the above input. Its a bit lighter and easily wraps to a new line.
+</FormText>
+</FormGroup>
+}
 
 export default Upload;
