@@ -1,54 +1,59 @@
-import React, { useState } from 'react';
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
+import Auth from "../../utils/auth";
+import { Link } from "react-router-dom";
 
-function Header(args) {
-  // const [isOpen, setIsOpen] = useState(false);
+function Nav() {
 
-  // const toggle = () => setIsOpen(!isOpen);
+  function showNavigation() {
+    if (Auth.loggedIn()) {
+      return (
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <Link to="/uploads" class="nav-link active" aria-current="page">
+                Uploads
+              </Link>
+            </li>
+            <li class="nav-item">
+              <a href="/" class="nav-link active" onClick={() => Auth.logout()}>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      );
+    } else {
+      return (
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <Link to="/signup" class="nav-link active" aria-current="page">
+                Signup
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link to="/login" class="nav-link">
+                Login
+              </Link>
+            </li>
+          </ul>
+        </div>
+      );
+    }
+  }
 
   return (
-    <div>
-      <Navbar {...args}>
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        {/* <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar> */}
-          <Nav className="me-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        {/* </Collapse> */}
-      </Navbar>
-    </div>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <Link to="/" class="navbar-brand">
+            InstaClip
+          </Link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          {showNavigation()}
+        </div>
+      </nav>
   );
 }
 
-export default Header;
+export default Nav;

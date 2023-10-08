@@ -5,12 +5,7 @@ const bcrypt = require('bcrypt');
 const Video = require('./Video');
 
 const userSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  lastName: {
+  name: {
     type: String,
     required: true,
     trim: true
