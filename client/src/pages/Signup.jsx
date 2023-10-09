@@ -1,46 +1,34 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
-import { ADD_PROFILE } from '../utils/mutations';
-
 import Auth from '../utils/auth';
-import '../styles/Signup.css';
+import { ADD_USER } from '../utils/mutations';
 
-const Signup = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
+function Signup(props) {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [addUser] = useMutation(ADD_USER);
 
-  // update state based on form input changes
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const mutationResponse = await addUser({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        name: formState.name,
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
-  // submit form
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formState);
-
-    try {
-      const { data } = await addProfile({
-        variables: { ...formState },
-      });
-
-      Auth.login(data.addProfile.token);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
+  
   return (
     <main className="flex-row justify-center mb-4" id="sign-up-form">
       <div className="col-12 col-lg-10">
@@ -80,11 +68,6 @@ const Signup = () => {
                   Submit
                 </button>
               </form>
-              {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
           </div>
         </div>
       </div>
