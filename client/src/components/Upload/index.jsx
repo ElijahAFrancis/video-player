@@ -1,31 +1,54 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  FormText
-} from 'reactstrap';
+import { useMutation } from '@apollo/client';
+import { UPLOAD_VIDEO } from '../../utils/mutations';
 
-function Upload() {
-  return (<Form><FormGroup>
-    <Label for="exampleFile">
-      File
-    </Label>
-    <Input
-      id="exampleFile"
-      name="file"
-      type="file"
-    />
-    <FormText>
-      This is some placeholder block-level help text for the above input. Its a bit lighter and easily wraps to a new line.
-    </FormText>
-  </FormGroup>
-    <Button color="primary" type="submit">
-      Submit
-    </Button>
-  </Form>);
+const Upload = () => {
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState('');
+  const [uploadVideo] = useMutation(UPLOAD_VIDEO);
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const handleTitleChange = (e) => {
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+  };
+
+  const handleUpload = async (event) => {
+    event.preventDefault();
+    if (file && title) {
+      try {
+        const { data } = await uploadVideo({
+          variables: {
+            file,
+            title,
+          },
+        });
+        // Handle response data here
+        console.log('Video uploaded successfully:', data.uploadVideo);
+      } catch (error) {
+        // Handle error
+        console.error('Error uploading video:', error.message);
+      }
+    } else {
+      // Handle no file or title selected
+      console.error('Please enter a title and select a video file to upload.');
+    }
+  };
+
+  return (
+    <div>
+      <h2>Upload Video</h2>
+      <form>
+        <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} required />
+        <input type="file" accept="video/*" onChange={handleFileChange} required />
+        <button onClick={handleUpload}>Upload</button>
+      </form>
+    </div>
+  );
 };
 
 export default Upload;
