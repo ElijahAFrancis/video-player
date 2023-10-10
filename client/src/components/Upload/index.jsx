@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 
 function Upload () {
+  return(
 <FormGroup>
 <Label for="exampleFile">
   File
@@ -20,6 +21,7 @@ function Upload () {
   This is some placeholder block-level help text for the above input. Its a bit lighter and easily wraps to a new line.
 </FormText>
 </FormGroup>
+  )
 }
 
 export default Upload;
