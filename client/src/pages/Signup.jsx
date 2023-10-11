@@ -28,7 +28,25 @@ function Signup(props) {
       [name]: value,
     });
   };
-  
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+      const { data } = await addProfile({
+        variables: { ...formState },
+        
+      });
+      console.log( 'signUp jsx data',data);
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <main className="flex-row justify-center mb-4" id="sign-up-form">
       <div className="col-12 col-lg-10">
