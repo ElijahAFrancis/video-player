@@ -1,15 +1,30 @@
 const typeDefs = `
 type User {
     _id: ID
-    firstName: String
-    lastName: String
+    name: String
     email: String
-    orders: [Order]
+    videos: [Video]
   }
 
-  type Checkout {
-    session: ID
-  }
+  type Video {
+    _id: ID
+    title: String
+    uploadDate: String
+    path: String
+}
+
+type Query {
+    video: Video
+    videos: [Video]
+    user: User
+}
+
+type Mutation {
+    uploadVideo(title: String, path: String): Video
+    addUser(name: String!, email: String!, password: String!): Auth
+    updateUser(name: String, email: String, password: String): User
+    login(email: String!, password: String!): Auth
+}
 
   type Auth {
     token: ID

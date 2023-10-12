@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
@@ -24,13 +24,16 @@ const Login = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+    // console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
       });
 
       Auth.login(data.login.token);
+      return (
+        <Navigate replace to="/" />
+      )
     } catch (e) {
       console.error(e);
     }
@@ -48,12 +51,6 @@ const Login = (props) => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
           <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -79,7 +76,6 @@ const Login = (props) => {
                   Submit
                 </button>
               </form>
-            )}
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">

@@ -1,29 +1,19 @@
-import { useQuery } from '@apollo/client';
-import ProfileList from '../components/Profile';
-import { QUERY_PROFILES } from '../utils/queries';
-import "../styles/Home.css";
+import Upload from "../components/Upload";
+import Auth from "../utils/auth";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_PROFILES);
-  const profiles = data?.profiles || [];
-
-  return (
-    <main className="main">
-      <div className="flex-row justify-center">
-        <div className="col-12 col-md-10 my-3">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ProfileList
-              profiles={profiles}
-              title="Insta Clip"
-              className="title"
-            />
-          )}
-        </div>
+  if (Auth.loggedIn()){
+    return (
+      <div className="container">
+        <Upload />
       </div>
-    </main>
-  );
+    );
+  } else {
+    return (
+      <Navigate replace to="/login" />
+    )
+  }
 };
 
 export default Home;
