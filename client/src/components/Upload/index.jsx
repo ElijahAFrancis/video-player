@@ -9,7 +9,6 @@ import {
   Input,
   FormText,
 } from 'reactstrap';
-import { UPLOAD_VIDEO } from '../../utils/mutations.js'; // Import the upload video mutation
 
 function Upload() {
   const [videoURL, setVideoURL] = useState(null);
@@ -30,15 +29,15 @@ function Upload() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  
+
     if (!selectedFile) {
       console.error('No file selected!');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('file', selectedFile);
-  
+
     // Use fetch to send the file to the server endpoint for handling uploads
     fetch('http://localhost:3001/upload', {
       method: 'POST',
@@ -48,7 +47,7 @@ function Upload() {
       .then((data) => {
         // Handle the server response, which may include the file path
         console.log('Server response:', data);
-  
+
         // Call the GraphQL mutation with the received file path
         uploadVideo({ variables: { title: videoTitle, path: data.filePath } })
           .then((response) => {
@@ -66,20 +65,33 @@ function Upload() {
       });
   };
 
+  const handleUpload = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('file', e.target.file.files[0]);
+
+    try {
+      // Send the formData to the server
+      const response = await fetch('http://localhost:3001/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Handle success, e.g., show a success message to the user
+      } else {
+        // Handle the error
+        console.error('File upload failed.');
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
   return (
     <div>
-      <Form onSubmit={handleFormSubmit}>
-        <FormGroup>
-          <Label for="videoTitle">Video Title</Label>
-          <Input
-            type="text"
-            name="title"
-            id="videoTitle"
-            value={videoTitle}
-            onChange={handleTitleChange}
-            required
-          />
-        </FormGroup>
+      <Form>
         <FormGroup>
           <Label for="exampleFile">Upload Video</Label>
           <Input
@@ -99,7 +111,12 @@ function Upload() {
       {videoURL && (
         <div>
           <h2>Uploaded Video:</h2>
-          <ReactPlayer url={videoURL} width="100%" height="400px" controls={true} />
+          <ReactPlayer
+            url={videoURL}
+            width="100%"
+            height="400px"
+            controls={true}
+          />
         </div>
       )}
     </div>
