@@ -7,19 +7,20 @@ type User {
   }
 
   type Video {
-    id: String
+    _id: ID
     title: String
-    filename: String
+    uploadDate: String
+    path: String
 }
 
 type Query {
-    video(id: String): Video
+    video(_id: ID!): Video
     videos: [Video]
     user: User
 }
 
 type Mutation {
-    uploadVideo(title: String, video: String): Video
+    uploadVideo(title: String, path: String): Video
     addUser(name: String!, email: String!, password: String!): Auth
     updateUser(name: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
