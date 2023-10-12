@@ -12,16 +12,11 @@ const videoSchema = new Schema({
     required: true,
     trim: true
   },
-  fileName:{
+  video: {
     type: String,
     required: true,
     unique: true
-  },
-  path:{
-    type: String,
-    required: true,
-    unique: true
-  },
+  }
 });
 
 const Video = mongoose.model('Video', videoSchema);
