@@ -14,7 +14,7 @@ type User {
 }
 
 type Query {
-    video: Video
+    video(_id: ID!): Video
     videos: [Video]
     user: User
 }

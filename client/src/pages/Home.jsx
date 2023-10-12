@@ -1,4 +1,5 @@
 import Upload from "../components/Upload";
+import Videos from "../components/Videos"
 import Auth from "../utils/auth";
 import { Navigate } from "react-router-dom";
 
@@ -7,6 +8,7 @@ const Home = () => {
     return (
       <div className="container">
         <Upload />
+        <Videos />
       </div>
     );
   } else {
