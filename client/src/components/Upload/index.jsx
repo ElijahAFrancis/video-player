@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import axios from 'axios';
+import { useMutation, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import { UPLOAD_VIDEO } from '../../utils/mutations';
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql', // Replace with your GraphQL server endpoint
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -19,16 +30,30 @@ const Upload = () => {
 
   const handleUpload = async (event) => {
     event.preventDefault();
+
     if (file && title) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('title', title);
+
       try {
-        const { data } = await uploadVideo({
+        // Send POST request using Axios
+        const response = await axios.post('http://localhost:3001/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        // Handle response data here
+        console.log('Video uploaded successfully:', response.data);
+
+        // You can also use your GraphQL mutation here if needed
+        await uploadVideo({
           variables: {
-            file,
+            file: response.data.fileUrl, // Assuming your server sends back the file URL
             title,
           },
         });
-        // Handle response data here
-        console.log('Video uploaded successfully:', data.uploadVideo);
       } catch (error) {
         // Handle error
         console.error('Error uploading video:', error.message);
@@ -40,14 +65,16 @@ const Upload = () => {
   };
 
   return (
-    <div>
-      <h2>Upload Video</h2>
-      <form>
-        <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} required />
-        <input type="file" accept="video/*" onChange={handleFileChange} required />
-        <button onClick={handleUpload}>Upload</button>
-      </form>
-    </div>
+    <ApolloProvider client={client}>
+      <div>
+        <h2>Upload Video</h2>
+        <form>
+          <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} required />
+          <input type="file" accept="video/*" onChange={handleFileChange} required />
+          <button onClick={handleUpload}>Upload</button>
+        </form>
+      </div>
+    </ApolloProvider>
   );
 };
 
