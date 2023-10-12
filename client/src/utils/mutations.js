@@ -29,3 +29,13 @@ export const ADD_PROFILE = gql`
     }
   }
 `;
+
+export const UPLOAD_VIDEO = gql`
+  mutation uploadVideo($title: String!, $path: String!) {
+    uploadVideo(title: $title, path: $path) {
+      title
+      path
+      uploadDate
+    }
+  }
+`;

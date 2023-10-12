@@ -6,6 +6,9 @@ const resolvers = {
     videos: async () => {
       return await Video.find();
     },
+    video: async (parent, { id }) => {
+      return await Video.findById(id);
+    },
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate(
@@ -21,6 +24,14 @@ const resolvers = {
     }
   },
   Mutation: {
+    uploadVideo: async (parent, { title, path }, context) => {
+      if (context.user) {
+        const video = await Video.create({ title, path, uploadDate: new Date() });
+        await User.findByIdAndUpdate(context.user._id, { $push: { videos: video._id } });
+        return video;
+      }
+      throw new AuthenticationError('Not logged in');
+    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
