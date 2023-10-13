@@ -12,7 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.4",
+<<<<<<< HEAD
     "@google-cloud/storage": "^7.2.0",
+=======
+    "@google-cloud/storage": "^7.3.0",
+>>>>>>> 67779006bb8c73d054a9f691fedf242994071c5d
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
