@@ -10,7 +10,7 @@ const videoSchema = new Schema({
   path: {
     type: String,
     required: true,
-    unique: true
+    unique: false
   }
 });
 
