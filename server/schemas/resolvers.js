@@ -26,7 +26,7 @@ const resolvers = {
   Mutation: {
     uploadVideo: async (parent, { title, path }, context) => {
       if (context.user) {
-        const video = await Video.create({ title, path, uploadDate: new Date() });
+        const video = await Video.create({ path, uploadDate: new Date() });
         await User.findByIdAndUpdate(context.user._id, { $push: { videos: video._id } });
         return video;
       }

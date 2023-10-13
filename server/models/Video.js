@@ -7,11 +7,6 @@ const videoSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
-    type: String,
-    required: true,
-    trim: true
-  },
   path: {
     type: String,
     required: true,
