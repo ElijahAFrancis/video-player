@@ -4,12 +4,11 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from './App.jsx';
-import Upload from './pages/Upload'
 import Home from './pages/Home';
-// import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
+import SingleVideo from './pages/SingleVideo'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +25,10 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <Signup />
-      },
+      }, {
+        path: '/video/:id',
+        element: <SingleVideo/>
+      }
     ]
   },
 ]);

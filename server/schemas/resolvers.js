@@ -6,8 +6,8 @@ const resolvers = {
     videos: async () => {
       return await Video.find();
     },
-    video: async (parent, { id }) => {
-      return await Video.findById(id);
+    video: async (parent, { _id }) => {
+      return await Video.findById(_id);
     },
     user: async (parent, args, context) => {
       if (context.user) {
@@ -15,7 +15,7 @@ const resolvers = {
           'videos'
         );
 
-        user.videos.sort((a, b) => b.uploadeDate - a.uploadDate);
+        user.videos.sort((a, b) => b.uploadDate - a.uploadDate);
 
         return user;
       }

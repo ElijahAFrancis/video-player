@@ -12,3 +12,13 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_VIDEO = gql`
+  query getVideo($id: ID!) {
+    video(_id: $id) {
+      _id
+      path
+      uploadDate
+    }
+  }
+`;
