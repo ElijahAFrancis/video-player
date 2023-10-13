@@ -2,7 +2,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('title', document.getElementById('title').value);
     formData.append('video', document.getElementById('video').files[0]);
 
     try {

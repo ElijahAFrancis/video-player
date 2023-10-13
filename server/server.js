@@ -70,8 +70,10 @@ const startApolloServer = async () => {
       res.status(500).send('File upload to GCS failed');
     });
 
-    blobStream.on('finish', () => {
-      res.status(200).send('File uploaded to Google Cloud Storage');
+    blobStream.on('finish', async () => {
+      // Generate a public URL for the uploaded file
+      const publicUrl = `https://storage.googleapis.com/${bucketName}/${blob.name}`;
+      res.json({ publicUrl }); // Return the public URL to the client
     });
 
     blobStream.end(req.file.buffer);
@@ -86,9 +88,13 @@ const startApolloServer = async () => {
   }
 
   db.once('open', () => {
+    const hostname = process.env.HOSTNAME || 'localhost'; // Use 'localhost' as the default value for local development
+    const serverUrl = `http://${hostname}:${PORT}`;
+    console.log(`API server running at ${serverUrl}`);
+    console.log(`Use GraphQL at ${serverUrl}/graphql`);
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+      console.log(`Use GraphQL at ${serverUrl}/graphql`);
     });
   });
 };

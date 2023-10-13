@@ -7,7 +7,6 @@ export const QUERY_USER = gql`
       videos {
         _id
         uploadDate
-        title
         path
       }
     }
