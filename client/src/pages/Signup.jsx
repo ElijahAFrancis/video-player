@@ -75,13 +75,16 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-info justify-center"
+                  className="btn btn-block btn-info"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
                   Submit
                 </button>
               </form>
+              <Link to="/login" id='login-link'>
+                Aleady Have an Account?
+                </Link>
               {error && (
               <div className="my-3 p-3 bg-danger text-white">
                 {error.message}

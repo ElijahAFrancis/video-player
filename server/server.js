@@ -6,12 +6,14 @@ const { authMiddleware } = require('./utils/auth');
 const { Storage } = require('@google-cloud/storage'); // Import the Google Cloud Storage library
 const { uploadMiddleware } = require('./utils/upload');
 const multer = require('multer'); // Import multer for file uploads
+const cors = require('cors');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+app.use(cors());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -93,8 +95,3 @@ const startApolloServer = async () => {
 
 // Call the async function to start the server
 startApolloServer();
-
-
-
-
-

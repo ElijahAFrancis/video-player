@@ -9,8 +9,8 @@ function Nav() {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <Link to="/upload" class="nav-link active" aria-current="page">
-                Upload
+              <Link to="/" class="nav-link active" aria-current="page">
+                Home
               </Link>
             </li>
             <li class="nav-item">
