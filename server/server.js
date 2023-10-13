@@ -3,34 +3,19 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const { Storage } = require('@google-cloud/storage'); // Import the Google Cloud Storage library
 const { uploadMiddleware } = require('./utils/upload');
+const multer = require('multer'); // Import multer for file uploads
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-app.use(cors());
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
-
-// Set up Multer to handle file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads/'); // Specify the directory where uploaded files will be stored
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const fileExtension = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension); // Define the uploaded file name
-  },
-});
-
-const upload = multer({ storage: storage });
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
@@ -41,14 +26,6 @@ const startApolloServer = async () => {
 
   // Serve up static assets
   app.use('/images', express.static(path.join(__dirname, '../client/images')));
-
-  // Multer middleware for handling file uploads
-  app.post('/upload', upload.single('file'), (req, res) => {
-    const filePath = req.file.path;
-    // Handle the file path as needed, such as saving it to the database
-    console.log('File uploaded:', filePath);
-    res.json({ success: true, filePath });
-  });
 
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
