@@ -7,6 +7,8 @@ const { Storage } = require('@google-cloud/storage'); // Import the Google Cloud
 const { uploadMiddleware } = require('./utils/upload');
 const multer = require('multer'); // Import multer for file uploads
 const cors = require('cors');
+require('dotenv').config();
+
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -33,9 +35,20 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
-  // Initialize Google Cloud Storage
   const storage = new Storage({
-    keyFilename: './config/proxy-199321-af9ee72803c7.json', // Path to your service account key JSON file
+   credentials: {
+    "type": "service_account",
+    "project_id": "proxy-199321",
+    "private_key_id": "af9ee72803c7eb1c012a21f332da3e1e423533b6",
+    "private_key": process.env.PRIVATE_KEY,
+    "client_email": "mckit77@proxy-199321.iam.gserviceaccount.com",
+    "client_id": "117306848315221002731",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mckit77%40proxy-199321.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
   });
 
   const bucketName = 'uploads_bucket_instaclip'; // Replace with your GCS bucket name // Replace with your GCS bucket name
