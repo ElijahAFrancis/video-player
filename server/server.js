@@ -40,7 +40,7 @@ const startApolloServer = async () => {
     "type": "service_account",
     "project_id": "proxy-199321",
     "private_key_id": "af9ee72803c7eb1c012a21f332da3e1e423533b6",
-    "private_key": process.env.PRIVATE_KEY,
+    "private_key": process.env.PRIVATE_KEY.split(String.raw`\n`).join('\n'),
     "client_email": "mckit77@proxy-199321.iam.gserviceaccount.com",
     "client_id": "117306848315221002731",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
