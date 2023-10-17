@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player';
 import { useMutation } from '@apollo/client';
 import { Form, Button, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { UPLOAD_VIDEO } from '../../utils/mutations'
+const serverUrl = import.meta.env.BASE_URL
 // const [uploadVideo] = useMutation(UPLOAD_VIDEO);
 
 function Upload() {
@@ -23,7 +24,7 @@ function Upload() {
 
     try {
       // Send the formData to the server
-      const response = await fetch(`https://${window.location.hostname}:3001/upload`, {
+      const response = await fetch(`https://instaclip-5c26d78800f1.herokuapp.com/upload`, {
         method: 'POST',
         body: formData,
       })
