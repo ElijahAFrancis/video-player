@@ -23,7 +23,7 @@ function Upload() {
 
     try {
       // Send the formData to the server
-      const response = await fetch(`http://${window.location.hostname}:3001/upload`, {
+      const response = await fetch(`https://${window.location.hostname}:3001/upload`, {
         method: 'POST',
         body: formData,
       })
