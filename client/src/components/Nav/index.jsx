@@ -1,6 +1,6 @@
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
-import logo from "./images/logo.png"
+import logo from "../../../public/images/logo.png"
 
 function Nav() {
 
@@ -46,6 +46,7 @@ function Nav() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <Link to="/" class="navbar-brand">
+            <img src={logo} alt="logo" className="navbar-logo" />
             InstaClip
           </Link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
