@@ -31,6 +31,12 @@ a:hover {
   min-width: 320px;
   min-height: 100vh;
 } */
+html, body {
+  /* your previous styles */
+  background-image: url('/images/IC-background.jpg');
+  background-size: cover;
+  background-attachment: fixed;  /* Optional: makes background image fixed */
+}
 
 h1 {
   font-size: 3.2em;
@@ -77,4 +83,42 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* Additional styles for navigation */
+.navbar {
+  background-color: var(--bg-body-tertiary);
+}
+
+.navbar-logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #fff;
+}
+
+.nav-link {
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-color-primary);
+}
+
+/* Override to match your color variables */
+:root {
+  --bg-body-tertiary: #242424;
+  --text-color-secondary: #aaa;
+  --text-color-primary: #fff;
 }

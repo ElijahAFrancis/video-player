@@ -1,6 +1,8 @@
 /* Import your existing styles */
 @import url('../index.css');
-
+:root {
+    --bs-emphasis-color-rgb: 255, 255, 255;
+}
 /* Override existing styles specific to the login page */
 .main-container {
     /* Center the content on the page */
@@ -47,7 +49,15 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.bg-body-tertiary {
+    background-color: #6a70df !important;
+    margin-bottom: 20px;
+}
+/* .navbar-brand {
+    color: #fff !important;
 
+    /* text-shadow: rgb(29, 28, 28) 0.1em 0.1em 0.0em; */
+/* } */ 
 .btn-info {
     background-color: #FFA500;
     /* Bright orange color for the Submit button */
