@@ -33,7 +33,7 @@ a:hover {
 } */
 html, body {
   /* your previous styles */
-  background-image: url('/images/IC-background.jpg');
+  background-image: url('/src/images/IC-background.jpg');
   background-size: cover;
   background-attachment: fixed;  /* Optional: makes background image fixed */
 }

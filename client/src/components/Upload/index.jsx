@@ -36,6 +36,7 @@ function Upload() {
           .then((response) => {
             console.log('Video uploaded');
             // Handle the GraphQL response as needed
+            window.location.reload();
           })
           .catch((error) => {
             console.error('Error uploading video:', error);
