@@ -3,9 +3,6 @@ import ReactPlayer from 'react-player';
 import { useMutation } from '@apollo/client';
 import { Form, Button, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { UPLOAD_VIDEO } from '../../utils/mutations'
-const serverUrl = import.meta.env.BASE_URL
-// const [uploadVideo] = useMutation(UPLOAD_VIDEO);
-
 function Upload() {
   const [videoURL, setVideoURL] = useState(null);
   const [uploadVideo] = useMutation(UPLOAD_VIDEO);
