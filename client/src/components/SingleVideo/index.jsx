@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useQuery } from '@apollo/client';
 import { QUERY_VIDEO } from '../../utils/queries';
+import '../../styles/SingleVideo.css';
 
 const SingleVideo = () => {
   const { id } = useParams(); // Destructure 'id' from useParams
@@ -41,11 +42,9 @@ const SingleVideo = () => {
 
   return (
     <div>
-      <ReactPlayer url={video.path} width="50%" height="50%" controls={true} />
-
-      {/* Display the public link and copy button below the video */}
-      <div>
-        <button onClick={handleCopyLink}>
+      <div className='video-container'>
+        <ReactPlayer url={video.path} width="50%" height="50%" controls={true} id="single-video" />
+        <button onClick={handleCopyLink} className='justify-center'>
           {isCopied ? 'Link Copied!' : 'Copy Link to Clipboard'}
         </button>
       </div>
