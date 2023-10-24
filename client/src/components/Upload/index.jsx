@@ -5,6 +5,7 @@ import { Form, Button, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { UPLOAD_VIDEO } from '../../utils/mutations'
 function Upload() {
   const [videoURL, setVideoURL] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [uploadVideo] = useMutation(UPLOAD_VIDEO);
 
   const handleFileChange = (e) => {
@@ -15,6 +16,7 @@ function Upload() {
 
   const handleUpload = async (e) => {
     e.preventDefault();
+    setUploading(true);
 
     const formData = new FormData();
     formData.append('file', e.target.file.files[0]);
@@ -54,6 +56,8 @@ function Upload() {
 
   return (
     <div>
+      {uploading && <h2>Uploading video...</h2>}
+      {!uploading && (
       <Form onSubmit={handleUpload}>
         <FormGroup>
           <Label for="exampleFile">Upload Video</Label>
@@ -70,7 +74,8 @@ function Upload() {
           Submit
         </Button>
       </Form>
-      {videoURL && <ReactPlayer url={videoURL} controls />}
+      )}
+      {!uploading && videoURL && <ReactPlayer url={videoURL} controls />}
     </div>
   );
 }
