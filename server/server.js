@@ -102,7 +102,7 @@ const startApolloServer = async () => {
   }
 
   db.once('open', () => {
-    const hostname = process.env.HOSTNAME || 'https://instaclip-1e10b99ebab3.herokuapp.com/'; // Use 'localhost' as the default value for local development
+    const hostname = process.env.HOSTNAME || 'localhost'; // Use 'localhost' as the default value for local development
     const serverUrl = `http://${hostname}:${PORT}`;
     console.log(`API server running at ${serverUrl}`);
     console.log(`Use GraphQL at ${serverUrl}/graphql`);
