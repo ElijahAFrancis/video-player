@@ -15,7 +15,16 @@ const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-app.use(cors());
+const cors = require('cors');
+
+const corsOptions = {
+  origin: 'https://instaclip-1e10b99ebab3.herokuapp.com', // The allowed origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
+  credentials: true, // If cookies or authentication headers are needed
+};
+
+app.use(cors(corsOptions));
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -51,7 +60,7 @@ const startApolloServer = async () => {
     }
   });
 
-  const bucketName = 'uploads_bucket_instaclip'; // Replace with your GCS bucket name // Replace with your GCS bucket name
+  const bucketName = 'uploads_bucket_instaclip'; // Replace with your GCS bucket name
   const bucket = storage.bucket(bucketName);
 
   // Set up multer for file uploads
