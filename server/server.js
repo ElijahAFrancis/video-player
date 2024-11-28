@@ -15,7 +15,6 @@ const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const cors = require('cors');
 
 const corsOptions = {
   origin: 'https://instaclip-1e10b99ebab3.herokuapp.com', // The allowed origin
